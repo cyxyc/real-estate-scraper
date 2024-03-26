@@ -1,2 +1,12 @@
 scraper, podobný: https://github.com/JirkaZelenka/Sreality 
 bakalářka k API sreality: https://dspace.cvut.cz/bitstream/handle/10467/103384/F8-BP-2021-Malach-Ondrej-thesis.pdf?sequence=-1&isAllowed=y
+
+
+Imgur
+https://github.com/Imgur/imgurpython
+
+-udelat druhou SQL tabulku kde bude ID, stara URL (sreality), nova URL (imgur). jedno ID (nemovitost) bude mit vice fotek. (=nedelat to jako list) 
+
+-pridat k tomu i machine learning - CNN obrazkovou klasifikaci stavu nemovitosti (ruina --- novostavba). to pak vratit zpet do databaze a delat na tom predikci ceny nebo anomaly detekci
+-jako DB pro uceni pouzit databazi srealit (maji tam  fotky + oznaceni novostavba atd. ej to nekdy v te tabulce. vytahnout to pres API (melo by to jit a byt jednodussi))
+-databaze nemusi byt velka. jde spis o to si to vyzkouset. 

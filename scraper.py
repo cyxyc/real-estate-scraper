@@ -15,8 +15,7 @@ def login(browser: webdriver):
 
     # Find and fill the username field
     username_field = browser.find_element(By.ID, "login-username")
-    # username_field.send_keys(os.getenv('EMAIL_LOGIN'))
-    username_field.send_keys('magorjoe@seznam.cz')
+    username_field.send_keys(os.getenv('EMAIL_LOGIN'))
     username_field.send_keys(Keys.RETURN)
 
     # Find the password field
@@ -28,8 +27,8 @@ def login(browser: webdriver):
 
     # Enter your password
     
-    # password_field.send_keys(os.getenv('EMAIL_PASSWORD'))
-    password_field.send_keys('akculakcul')
+    password_field.send_keys(os.getenv('EMAIL_PASSWORD'))
+
     username_field.send_keys(Keys.RETURN)
     print("heslo zadano a enternuto")
     # Find the login button
@@ -119,18 +118,11 @@ def find_tags(browser: webdriver, url: str, purpose, scrape, save, filename: str
         # area = int(find_area[7].text.replace('\xa0', ' '))
         area = title.split(" ")[-2]
 
-        # Find all noscript tags
+        # Get photos of the item
         noscripts = soup.find_all('noscript')
-
-        # Initialize an empty list to store the image URLs
         img_urls = []
-
-        # Loop through each noscript tag
         for noscript in noscripts:
-            # Find the img tag within the current noscript tag
             img = noscript.find('img')
-            
-            # If there is an img tag, get the src attribute and add it to the list
             if img is not None:
                 img_urls.append(img.get('src'))
 

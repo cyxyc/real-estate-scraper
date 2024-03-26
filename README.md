@@ -10,7 +10,7 @@ Tools We Use:
 Web Scraping: Python (BeautifulSoup, Scrapy, or similar library)
 Database: PostgreSQL
 Database Administration Tool: pgAdmin
-Cloud Storage: Google Cloud Storage
+Cloud Storage: imgur
 Data Visualization: Power BI
 Python Library for PostgreSQL: psycopg2
 

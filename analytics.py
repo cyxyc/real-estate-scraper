@@ -1,3 +1,3 @@
 import pandas as pd
 
-df = pd.read_csv('df.csv')
+df = pd.read_csv('df2.csv')
