@@ -15,7 +15,8 @@ def login(browser: webdriver):
 
     # Find and fill the username field
     username_field = browser.find_element(By.ID, "login-username")
-    username_field.send_keys(os.getenv('EMAIL_LOGIN'))
+    # username_field.send_keys(os.getenv('EMAIL_LOGIN'))
+    username_field.send_keys('magorjoe@seznam.cz')
     username_field.send_keys(Keys.RETURN)
 
     # Find the password field
@@ -27,7 +28,8 @@ def login(browser: webdriver):
 
     # Enter your password
     
-    password_field.send_keys(os.getenv('EMAIL_PASSWORD'))
+    # password_field.send_keys(os.getenv('EMAIL_PASSWORD'))
+    password_field.send_keys('akculakcul')
     username_field.send_keys(Keys.RETURN)
     print("heslo zadano a enternuto")
     # Find the login button
@@ -103,7 +105,7 @@ def find_tags(browser: webdriver, url: str, purpose, scrape, save, filename: str
         return items_urls
     
     elif purpose == 'get_details':
-     
+   
         find_title = soup.find_all('span', class_='name ng-binding')
         title = find_title[0].text.replace('\xa0', ' ')
         find_price = soup.find_all('span', class_='norm-price ng-binding')
@@ -116,15 +118,46 @@ def find_tags(browser: webdriver, url: str, purpose, scrape, save, filename: str
         # find_area = soup.find_all('span', class_='ng-binding ng-scope')
         # area = int(find_area[7].text.replace('\xa0', ' '))
         area = title.split(" ")[-2]
+
+        # Find all noscript tags
+        noscripts = soup.find_all('noscript')
+
+        # Initialize an empty list to store the image URLs
+        img_urls = []
+
+        # Loop through each noscript tag
+        for noscript in noscripts:
+            # Find the img tag within the current noscript tag
+            img = noscript.find('img')
+            
+            # If there is an img tag, get the src attribute and add it to the list
+            if img is not None:
+                img_urls.append(img.get('src'))
+
+        # Now img_urls contains all the image URLs from img tags within noscript tags
+        print(img_urls)
+
         
-        return [title, price, location, description, area]
+        return [title, price, location, description, area, img_urls]
+
+
+
+# get_photos = soup.find_all('img', class_='ob-c-gallery__img')
+# photos_url = [img.get('src') for img in get_photos]
+
+
+
+# Now img_urls contains all the image URLs
+
+
 
 
 def main():
     # Set up the Selenium driver
     browser = webdriver.Chrome()
     login(browser)
-    main_url = 'https://www.sreality.cz/hledani/prodej/byty/frydek-mistek?velikost=2%2B1,2%2Bkk'
+    # main_url = 'https://www.sreality.cz/hledani/prodej/byty/frydek-mistek?velikost=2%2B1,2%2Bkk'
+    main_url = 'https://www.sreality.cz/hledani/prodej/ostatni/garaze/frydek-mistek'
     pages_urls = find_tags(browser, main_url, purpose = 'get_pages', filename = "default_file_name", scrape = True, save = False)
     
     #TODO: to restartovani asi bude potreba delat i v tom for cyklu
@@ -160,7 +193,7 @@ def main():
                     fails += 1
 
     df = pd.DataFrame(df)
-    df.to_csv('df.csv', index=False)
+    df.to_csv('df2.csv', index=False)
     print(counter_try, counter_succ, fails)
     print(len(df))
     # Quit the webdriver
