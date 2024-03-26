@@ -6,6 +6,8 @@ import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+import pandas as pd
+
 
 def login(browser: webdriver):
     # Go to the seznam.cz login page
@@ -122,7 +124,7 @@ def main():
     # Set up the Selenium driver
     browser = webdriver.Chrome()
     login(browser)
-    main_url = 'https://www.sreality.cz/hledani/prodej/domy/moravskoslezsky-kraj?velikost=1-pokoj&stav=dobry-stav'
+    main_url = 'https://www.sreality.cz/hledani/prodej/byty/frydek-mistek?velikost=2%2B1,2%2Bkk'
     pages_urls = find_tags(browser, main_url, purpose = 'get_pages', filename = "default_file_name", scrape = True, save = False)
     
     #TODO: to restartovani asi bude potreba delat i v tom for cyklu
@@ -157,11 +159,14 @@ def main():
                     time.sleep(3)  # Wait a bit before retrying
                     fails += 1
 
-    print(df)
+    df = pd.DataFrame(df)
+    df.to_csv('df.csv', index=False)
     print(counter_try, counter_succ, fails)
     print(len(df))
     # Quit the webdriver
     browser.quit()
+
+
 
 if __name__ == "__main__":
     #TODO: delete "scrape" when you are done with development
