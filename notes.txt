@@ -1,0 +1,2 @@
+scraper, podobný: https://github.com/JirkaZelenka/Sreality 
+bakalářka k API sreality: https://dspace.cvut.cz/bitstream/handle/10467/103384/F8-BP-2021-Malach-Ondrej-thesis.pdf?sequence=-1&isAllowed=y
