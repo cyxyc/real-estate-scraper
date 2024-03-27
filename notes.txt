@@ -17,23 +17,42 @@ SCRAPER/ANALYTIKA
 -hledani podobnosti inzeratu (na zaklade treba vektoru similarity?)
 -typ prodeje a typ nemovitosti dostat z Title z tabulky
 -ta location co je v tabulce je nahovno - zkusit scrapnout jinak (možná z API jak ogithub typek?), popr zkusit dostat z odkazu nebo z location v tabulce, ale to pujde blbě. asi jen přes nějakou pomocnou tabulku se seznamem měst (protože tam jinak bude dělat bordel např. frýdek-místek - místek atd -> nepůjde to jen splitnout. podivat se na github jak to dělá borec)
-    # Your DataFrame - moje location -> splitnu to, ale nevim podle ceho... musí to pochopit "Český Těšín" i "Frýdek-Místek"
-    df = pd.DataFrame({'words': ['A', 'B', 'C', 'D']})
+    řešení: pomocná tabulka měst + tenhle script: 
+    # Your DataFrame of sentences
+    df_sentences = pd.DataFrame({'sentences': ["Hello, my name is John ", "I live in New York", "My friend's name is Jane Doe"]})
 
-    # Your list of strings
-    string_list = ["A", "G", "N"]
+    # Your DataFrame of names
+    df_names = pd.DataFrame({'names': ["John Doe", "Jane Doe", "Alice"]})
 
-    # Find the words that are in the list of strings
-    df['match'] = df['words'].isin(string_list)
+    # Convert names DataFrame to list
+    names = df_names['names'].tolist()
 
-    # Get the matching words
-    matching_words = df.loc[df['match'], 'words']
+    # Check if each sentence contains a name from the list and return the name
+    df_sentences['name'] = df_sentences['sentences'].apply(lambda sentence: next((name for name in names if name in sentence), None))
 
-    print(matching_words)
+    print(df_sentences)
+
+-lokalitu bych mohl brát ještě z GPS souřadnic ->  https://geocode.maps.co/ přes jejich API a na základě GPS mi řekne adresu (API call - limit 1 za sekundu! : https://geocode.maps.co/reverse?lat=49.734061604&lon=18.615677485&api_key=6603d5fe0cc3d866415536bwpb7a48d)
+-nebo můžu použít geopy jak oborec z gitu: 
+    from geopy.geocoders import Nominatim
+    geolocator = Nominatim(timeout = 20, user_agent = "JZ_Sreality")
+    latitude = 49.734061604
+    longitude = 18.615677485
+    location = geolocator.reverse([latitude, longitude])
+    print(location.address)
 
 -API má v sobě lepší informace. např o vlastnictví (ownership) (družstevní vs osobní!!!,), jak používat: https://www.sreality.cz/detail/prodej/byt/3+1/znojmo-znojmo-riegrova/405308748 => https://www.sreality.cz/api/cs/v2/estates/405308748
 -pokud se nakoenc rozhodnu brát věci z API, tak scrapování detailů (fotky, cena, název, atd.) nedělej už přes browser ale z toho api. bude t mnohem rychlejší.
 -v API je dobrá položka meta_description (krátké shrnutí. přidat do tabulky).
 -podobnost inzerátů možná nedělat přes vektory ale přes GPS. nebo aspoň přidat GPS do tabulky ať to vektor líp najde. 
 
--teď se asi vykalat na dalš íscrapování a řešit SQL databázi (ať se někam pohnu)
+-teď se asi vykalat na další scrapování a řešit SQL databázi (ať se někam pohnu)
+
+
+požadavky:
+    garáže:
+        -ukládat popisky, fotky, lokalitu, cenu
+        -prodej i pronájem
+        -nepotřebuju přesné detaily (vše vyčtu z popisku)
+        -lokalita stačí vědět město
+        -stáří inzerátu
