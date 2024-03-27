@@ -7,6 +7,33 @@ https://github.com/Imgur/imgurpython
 
 -udelat druhou SQL tabulku kde bude ID, stara URL (sreality), nova URL (imgur). jedno ID (nemovitost) bude mit vice fotek. (=nedelat to jako list) 
 
+ML
 -pridat k tomu i machine learning - CNN obrazkovou klasifikaci stavu nemovitosti (ruina --- novostavba). to pak vratit zpet do databaze a delat na tom predikci ceny nebo anomaly detekci
 -jako DB pro uceni pouzit databazi srealit (maji tam  fotky + oznaceni novostavba atd. ej to nekdy v te tabulce. vytahnout to pres API (melo by to jit a byt jednodussi))
 -databaze nemusi byt velka. jde spis o to si to vyzkouset. 
+
+SCRAPER/ANALYTIKA
+-trackovani stari inzeratu
+-hledani podobnosti inzeratu (na zaklade treba vektoru similarity?)
+-typ prodeje a typ nemovitosti dostat z Title z tabulky
+-ta location co je v tabulce je nahovno - zkusit scrapnout jinak (možná z API jak ogithub typek?), popr zkusit dostat z odkazu nebo z location v tabulce, ale to pujde blbě. asi jen přes nějakou pomocnou tabulku se seznamem měst (protože tam jinak bude dělat bordel např. frýdek-místek - místek atd -> nepůjde to jen splitnout. podivat se na github jak to dělá borec)
+    # Your DataFrame - moje location -> splitnu to, ale nevim podle ceho... musí to pochopit "Český Těšín" i "Frýdek-Místek"
+    df = pd.DataFrame({'words': ['A', 'B', 'C', 'D']})
+
+    # Your list of strings
+    string_list = ["A", "G", "N"]
+
+    # Find the words that are in the list of strings
+    df['match'] = df['words'].isin(string_list)
+
+    # Get the matching words
+    matching_words = df.loc[df['match'], 'words']
+
+    print(matching_words)
+
+-API má v sobě lepší informace. např o vlastnictví (ownership) (družstevní vs osobní!!!,), jak používat: https://www.sreality.cz/detail/prodej/byt/3+1/znojmo-znojmo-riegrova/405308748 => https://www.sreality.cz/api/cs/v2/estates/405308748
+-pokud se nakoenc rozhodnu brát věci z API, tak scrapování detailů (fotky, cena, název, atd.) nedělej už přes browser ale z toho api. bude t mnohem rychlejší.
+-v API je dobrá položka meta_description (krátké shrnutí. přidat do tabulky).
+-podobnost inzerátů možná nedělat přes vektory ale přes GPS. nebo aspoň přidat GPS do tabulky ať to vektor líp najde. 
+
+-teď se asi vykalat na dalš íscrapování a řešit SQL databázi (ať se někam pohnu)
