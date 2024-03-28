@@ -1,0 +1,22 @@
+from os import path
+from imgurpython import ImgurClient
+import pandas as pd
+import requests
+from io import BytesIO
+from PIL import Image
+
+df = pd.read_csv('df_imgs.csv')
+
+client_id = '7c437cedc06d28a'
+client_secret = '170eaa169865ce4f60cb70f0f8aa31b70788b69e'
+
+client = ImgurClient(client_id, client_secret)
+
+def upload_image_from_url(url):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    img.save('temp.png')
+    result = client.upload_from_path('temp.png')
+    return result['link']
+
+df['imgur_url'] = df['photo_URLs'].apply(upload_image_from_url)
