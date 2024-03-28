@@ -1,6 +1,8 @@
 scraper, podobný: https://github.com/JirkaZelenka/Sreality 
 bakalářka k API sreality: https://dspace.cvut.cz/bitstream/handle/10467/103384/F8-BP-2021-Malach-Ondrej-thesis.pdf?sequence=-1&isAllowed=y
-
+        API call: https://www.sreality.cz/api/cs/v2/estates?category_main_cb=1&category_sub_cb=6|7&category_type_cb=1&locality_district_id=5001|5008&locality_region_id=10
+        -kdybych chtěl tak můžu veškerý webscraping nahradit APInama: 1. API (nahoře) vezme seznam všech vyfiltrovaných nemovitostí, vrátí základní údaje (ne všechyn detaily) + ID. To ID pak použiju do druhé API (dole) k získání detailů.
+            -ale chci si nechat aspoň kus webscrapingu - na parádu
 
 Imgur
 https://github.com/Imgur/imgurpython
@@ -31,6 +33,7 @@ SCRAPER/ANALYTIKA
     df_sentences['name'] = df_sentences['sentences'].apply(lambda sentence: next((name for name in names if name in sentence), None))
 
     print(df_sentences)
+-GIT týpek páruje lokality s tabulkou pomocí jejich souřadnic. podle mě by mohlo stačit to dělat podle názvu města tím scriptem nahoře
 
 -lokalitu bych mohl brát ještě z GPS souřadnic ->  https://geocode.maps.co/ přes jejich API a na základě GPS mi řekne adresu (API call - limit 1 za sekundu! : https://geocode.maps.co/reverse?lat=49.734061604&lon=18.615677485&api_key=6603d5fe0cc3d866415536bwpb7a48d)
 -nebo můžu použít geopy jak oborec z gitu: 
