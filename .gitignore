@@ -162,3 +162,5 @@ cython_debug/
 #google api token
 .service_account.json
 service_account.json
+temp.png
+chromedriver-win64/LICENSE.chromedriver

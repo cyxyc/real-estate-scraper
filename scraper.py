@@ -125,6 +125,7 @@ def find_tags(browser: webdriver, url: str, purpose, scrape, save, filename: str
             img = noscript.find('img')
             if img is not None:
                 img_urls.append(img.get('src'))
+                #tady bych mohl pripichnout upload na imgur
 
         # Now img_urls contains all the image URLs from img tags within noscript tags
         print(img_urls)
