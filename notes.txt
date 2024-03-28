@@ -60,3 +60,10 @@ požadavky:
         -nepotřebuju přesné detaily (vše vyčtu z popisku)
         -lokalita stačí vědět město
         -stáří inzerátu
+
+
+
+ANALYTIKA:
+pro power bi stačí aby DF mel URL v jedné buňce (v listu). když to rozjebu explodem na každý řádek zvlášť tak to pak nejde. ale musí to být ty imgur URL
+a imgur zase vyžaduje aby to bylo explodnuté.
+musím z toho co vyscrapuju udělat explode -> imgur -> zase zpátky (group by) -> power bi
