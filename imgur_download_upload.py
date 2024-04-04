@@ -8,6 +8,7 @@ from PIL import Image
 #TODO: propojeni imguru a srealit? - pockat co ukaze praxe. pokud bude fungovat rozdelene, tak nechat. 
 #nejlepsi asi bude pak cely tenhle download z srealit a upload na imgur dat dohromady (scraper si bude volat tuhle funkci nebo to bude primo v nem)
 #scraper by pak krome img_urls (z srealit) vracel i imgur_urls (z imgur) (sreality URL vlastne ani nepotrebuju)
+# v analytics uz nebude potreba delat tu transformaci .explode a pak zase skladani zpatky = super baaam
 #nezapomenout pak predelat analytics.ipynb aby se to korespondovalo s imgurem
 #-nebo ne. nedelat to. pokud bych to udelal tak by se to pak hrozne blbe nebugovalo. nechat to rozdelene jako jednotlive funkcni celky.
 #udelat to jen v pripade ze bych se bal ze na API dostanu too many requests a budu muset cekat nez se to vsechno stahne (ten imgur by to zpomalil)

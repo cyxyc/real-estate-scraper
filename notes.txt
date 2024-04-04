@@ -7,7 +7,7 @@ bakalářka k API sreality: https://dspace.cvut.cz/bitstream/handle/10467/103384
 Imgur - IMGUR mozna NEPOTREBUJU  - teoreticky do PWBI můžu dávat rovnou URL obrázků z srealit a prevest je na Base64 (prevedou se na text a ulozi do reportu. ale to ho asi hodne zaseka)
 https://github.com/Imgur/imgurpython
 -udelat druhou SQL tabulku kde bude ID, stara URL (sreality), nova URL (imgur). jedno ID (nemovitost) bude mit vice fotek. (=nedelat to jako list) 
--abych mohl na imgur nahravat pod svuj acount a ne jako anonym, musim rucne inputovat pin :( 
+-abych mohl na imgur nahravat pod svuj acount a ne jako anonym, musim rucne inputovat pin :( to je hovadina. 
 
 
 ML
@@ -50,7 +50,15 @@ SCRAPER/ANALYTIKA
 -v API je dobrá položka meta_description (krátké shrnutí. přidat do tabulky).
 -podobnost inzerátů možná nedělat přes vektory ale přes GPS. nebo aspoň přidat GPS do tabulky ať to vektor líp najde. 
 
--teď se asi vykalat na další scrapování a řešit SQL databázi (ať se někam pohnu)
+
+SQL databaze
+-postgre SQL + pgAdmin 
+    -ze zacatku lokalne, pak muzu dat do dockeru (bude vypadat dobre v portfoliu + k tomu mam kod z informatiky s Misom, akorat tak asi dodelat docker compose)
+
+
+
+
+
 
 
 požadavky:
