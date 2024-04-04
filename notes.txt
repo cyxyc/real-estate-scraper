@@ -4,10 +4,11 @@ bakalářka k API sreality: https://dspace.cvut.cz/bitstream/handle/10467/103384
         -kdybych chtěl tak můžu veškerý webscraping nahradit APInama: 1. API (nahoře) vezme seznam všech vyfiltrovaných nemovitostí, vrátí základní údaje (ne všechyn detaily) + ID. To ID pak použiju do druhé API (dole) k získání detailů.
             -ale chci si nechat aspoň kus webscrapingu - na parádu
 
-Imgur
+Imgur - IMGUR mozna NEPOTREBUJU  - teoreticky do PWBI můžu dávat rovnou URL obrázků z srealit a prevest je na Base64 (prevedou se na text a ulozi do reportu. ale to ho asi hodne zaseka)
 https://github.com/Imgur/imgurpython
-
 -udelat druhou SQL tabulku kde bude ID, stara URL (sreality), nova URL (imgur). jedno ID (nemovitost) bude mit vice fotek. (=nedelat to jako list) 
+-abych mohl na imgur nahravat pod svuj acount a ne jako anonym, musim rucne inputovat pin :( to je hovadina. 
+
 
 ML
 -pridat k tomu i machine learning - CNN obrazkovou klasifikaci stavu nemovitosti (ruina --- novostavba). to pak vratit zpet do databaze a delat na tom predikci ceny nebo anomaly detekci
@@ -49,7 +50,15 @@ SCRAPER/ANALYTIKA
 -v API je dobrá položka meta_description (krátké shrnutí. přidat do tabulky).
 -podobnost inzerátů možná nedělat přes vektory ale přes GPS. nebo aspoň přidat GPS do tabulky ať to vektor líp najde. 
 
--teď se asi vykalat na další scrapování a řešit SQL databázi (ať se někam pohnu)
+
+SQL databaze
+-postgre SQL + pgAdmin 
+    -ze zacatku lokalne, pak muzu dat do dockeru (bude vypadat dobre v portfoliu + k tomu mam kod z informatiky s Misom, akorat tak asi dodelat docker compose)
+
+
+
+
+
 
 
 požadavky:
@@ -59,3 +68,10 @@ požadavky:
         -nepotřebuju přesné detaily (vše vyčtu z popisku)
         -lokalita stačí vědět město
         -stáří inzerátu
+
+
+
+ANALYTIKA:
+pro power bi stačí aby DF mel URL v jedné buňce (v listu). když to rozjebu explodem na každý řádek zvlášť tak to pak nejde. ale musí to být ty imgur URL
+a imgur zase vyžaduje aby to bylo explodnuté.
+musím z toho co vyscrapuju udělat explode -> imgur -> zase zpátky (group by) -> power bi
