@@ -12,8 +12,9 @@ from PIL import Image
 #nezapomenout pak predelat analytics.ipynb aby se to korespondovalo s imgurem
 #-nebo ne. nedelat to. pokud bych to udelal tak by se to pak hrozne blbe nebugovalo. nechat to rozdelene jako jednotlive funkcni celky.
 #udelat to jen v pripade ze bych se bal ze na API dostanu too many requests a budu muset cekat nez se to vsechno stahne (ten imgur by to zpomalil)
+#pokud to udelam tak odpadno ustarosti s analytics (nebudu muset cachrovat s dataframeama (explody, group bye atd))
 
-df = pd.read_csv('df_imgs.csv')
+df = pd.read_csv('df_imgs_pro_imgur.csv')
 
 client_id = '7c437cedc06d28a'
 client_secret = '170eaa169865ce4f60cb70f0f8aa31b70788b69e'
