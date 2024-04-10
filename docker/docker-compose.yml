@@ -1,0 +1,51 @@
+services:
+  # my-postgres:
+  #   image: postgres
+  #   container_name: my-postgres
+  #   networks:
+  #     - psql
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   restart: always
+
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin
+  #   networks:
+  #     - psql
+  #   volumes:
+  #     - pgadmin_data:/var/lib/pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: user@domain.com
+  #     PGADMIN_DEFAULT_PASSWORD: SuperSecret
+  #   ports:
+  #     - "80:80"
+  #   restart: always
+  pythonapp:
+    image: pythonapp
+    container_name: pythonapp
+    networks:
+      - psql
+    ports:
+      - "8000:8000"
+    restart: "always"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+
+networks:
+  psql:
+
+# volumes:
+#   pgdata:
+#   pgadmin_data: 
+
+
+#zapinej pomoci docker-compose up -d --build
+# docker exec -it pythonapp sh
